@@ -47,19 +47,3 @@ class CarStateMachine:
     def get_possible_actions(self):
         return list(self.transitions[self.state].keys())
 
-
-# Example usage
-car = CarStateMachine(CarState.AVAILABLE)
-print("Initial State:", car.state)
-
-possible_actions = car.get_possible_actions()
-print("Possible Actions:", [action.value for action in possible_actions])
-
-car.perform_action(CarAction.BOOK_CAR)
-print("State after booking:", car.state)
-
-car.perform_action(CarAction.PICK_UP_CAR)
-print("State after picking up:", car.state)
-
-car.perform_action(CarAction.RETURN_CAR)
-print("State after returning:", car.state)
