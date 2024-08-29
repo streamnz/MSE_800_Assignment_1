@@ -1,0 +1,38 @@
+@startuml
+robust "User" as U
+robust "System" as S
+robust "Database" as DB
+robust "Car" as C
+
+@0
+U is Idle
+S is Waiting
+DB is Idle
+C is Available
+
+@1
+U is Requesting : Start booking process
+S is Processing : Validate request
+
+@2
+S is Checking : Check availability
+C is Checking : Availability query
+
+@3
+C is Reserved : Car reserved
+S is Confirming : Confirm booking
+
+@4
+S is Saving : Save booking to DB
+DB is Storing : Store booking data
+
+@5
+DB is Idle : Booking saved
+S is Done : Booking confirmed
+U is Notified : Booking success
+
+@6
+U is Idle
+S is Waiting
+C is Reserved
+@enduml

@@ -1,0 +1,84 @@
+@startuml
+
+' Set direction from left to right for better readability
+left to right direction
+
+' Adjust spacing and connection lines for clarity
+skinparam package {
+    BorderColor #0000FF
+    FontColor #000000
+    ArrowColor #0000FF
+    Padding 15
+    Margin 20
+    Shadowing true
+}
+
+' Adjust connection line thickness and colors
+skinparam class {
+    ArrowColor #0000FF
+    ArrowThickness 2
+    BackgroundColor #FFFFFF
+    BorderColor #0000FF
+    FontColor #000000
+}
+
+package "Car Rental System" {
+
+    package "Controller Layer" {
+        class MainController
+    }
+
+    package "Service Layer" {
+        class UserManagement
+        class CarManagement
+        class BookingManagement
+    }
+
+    package "DAO Layer" {
+        class UserDAO
+        class CarDAO
+        class BookingDAO
+    }
+
+    package "Model Layer" {
+        class User
+        class Car
+        class Booking
+    }
+
+    package "Utils" {
+        class DatabaseConnection
+    }
+
+    ' Relationships within layers
+    "Controller Layer::MainController" --> "Service Layer::UserManagement"
+    "Controller Layer::MainController" --> "Service Layer::CarManagement"
+    "Controller Layer::MainController" --> "Service Layer::BookingManagement"
+
+    "Service Layer::UserManagement" --> "DAO Layer::UserDAO"
+    "Service Layer::CarManagement" --> "DAO Layer::CarDAO"
+    "Service Layer::BookingManagement" --> "DAO Layer::BookingDAO"
+
+    "DAO Layer::UserDAO" --> "Utils::DatabaseConnection"
+    "DAO Layer::CarDAO" --> "Utils::DatabaseConnection"
+    "DAO Layer::BookingDAO" --> "Utils::DatabaseConnection"
+
+    "Model Layer::User" <.. "DAO Layer::UserDAO"
+    "Model Layer::Car" <.. "DAO Layer::CarDAO"
+    "Model Layer::Booking" <.. "DAO Layer::BookingDAO"
+
+}
+
+' Adjust global settings for layout and spacing
+skinparam {
+    ArrowColor #0000FF
+    ArrowThickness 2
+    ArrowFontColor #000000
+    ArrowFontSize 12
+    ArrowFontName "Arial"
+    RectangleFontSize 14
+    RectangleFontName "Arial"
+    Shadowing true
+}
+
+@enduml

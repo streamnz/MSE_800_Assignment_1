@@ -1,0 +1,15 @@
+@startuml
+actor User as U
+participant "Registration Service" as RS
+participant "User Management" as UM
+participant "Database" as DB
+
+U -> RS: Enter registration details
+RS -> UM: Validate registration details
+UM -> DB: Check if user already exists
+DB --> UM: User not found
+UM -> DB: Save new user data
+DB --> UM: User data saved
+UM --> RS: Registration successful
+RS --> U: Registration confirmation
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+|Customer|
+:Login;
+:View Available Cars;
+:Select Car to Book;
+:Enter Rental Dates;
+:Confirm Booking;
+:Logout;
+
+|Admin|
+:Login;
+:Manage Users;
+:Manage Cars;
+:Manage Bookings;
+:Logout;
+
+|System|
+:Validate Credentials;
+:Display Cars;
+:Check Availability;
+:Create Booking;
+:Update Database;
+:Display Confirmation;
+@enduml

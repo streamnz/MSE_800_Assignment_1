@@ -1,0 +1,48 @@
+@startuml
+actor User
+actor Admin
+participant "Car Rental System" as CRS
+participant "Database" as DB
+
+== User Registration and Login ==
+User -> CRS: Register()
+CRS -> DB: Store User Details
+DB --> CRS: Registration Success
+User --> CRS: Login()
+CRS -> DB: Validate Credentials
+DB --> CRS: Authentication Success
+
+== Car Management (Admin) ==
+Admin -> CRS: Login()
+CRS -> DB: Validate Admin Credentials
+DB --> CRS: Authentication Success
+Admin -> CRS: Add Car Details()
+CRS -> DB: Insert Car Details
+DB --> CRS: Insert Success
+Admin -> CRS: Update Car Details()
+CRS -> DB: Update Car Record
+DB --> CRS: Update Success
+Admin -> CRS: Delete Car Record()
+CRS -> DB: Delete Car Record
+DB --> CRS: Deletion Success
+
+== Rental Booking (User) ==
+User -> CRS: View Available Cars
+CRS -> DB: Fetch Available Cars
+DB --> CRS: List of Available Cars
+User -> CRS: Book a Car
+CRS -> DB: Insert Booking Record
+CRS -> DB: Update Car Availability
+DB --> CRS: Booking Success
+CRS --> User: Booking Confirmation
+
+== Rental Management (Admin) ==
+Admin -> CRS: View Rental Requests
+CRS -> DB: Fetch Rental Requests
+DB --> CRS: List of Requests
+Admin -> CRS: Approve/Reject Booking
+CRS -> DB: Update Booking Status
+DB --> CRS: Update Success
+CRS --> Admin: Action Confirmation
+
+@enduml

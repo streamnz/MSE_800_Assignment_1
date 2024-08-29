@@ -1,0 +1,39 @@
+@startuml
+actor Customer
+boundary "UI Layer" as UI
+control "BookingController" as Controller
+entity "UserDAO" as UserDAO
+entity "CarDAO" as CarDAO
+entity "BookingDAO" as BookingDAO
+database "Database" as DB
+
+Customer -> UI: Request to book a car
+UI -> Controller: Submit booking request
+Controller -> UserDAO: Verify customer credentials
+UserDAO -> DB: Query customer information
+DB --> UserDAO: Return customer info
+UserDAO --> Controller: Return verification status
+
+alt Customer is valid
+    Controller -> CarDAO: Check car availability
+    CarDAO -> DB: Query car status
+    DB --> CarDAO: Return car availability
+    CarDAO --> Controller: Return availability status
+
+    alt Car is available
+        Controller -> BookingDAO: Create booking
+        BookingDAO -> DB: Save booking details
+        DB --> BookingDAO: Booking confirmed
+        BookingDAO --> Controller: Return booking confirmation
+        Controller --> UI: Display booking confirmation
+        UI --> Customer: Booking confirmed, display booking details
+    else Car is not available
+        Controller --> UI: Display error message
+        UI --> Customer: Notify car not available
+    end
+else Customer is not valid
+    Controller --> UI: Display error message
+    UI --> Customer: Notify invalid credentials
+end
+
+@enduml

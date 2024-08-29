@@ -1,0 +1,48 @@
+@startuml
+!define RECTANGLE_COLOR #F9F9F9
+left to right direction
+
+actor Customer
+actor Admin
+
+rectangle "Car Rental System" as CRS {
+    Customer --> (Register)
+    Customer --> (Login)
+    Customer --> (View Available Cars)
+    Customer --> (Book Car)
+    Customer --> (View Rental History)
+    Customer --> (View Current User Info)
+
+    Admin --> (Login)
+    Admin --> (Manage Cars)
+    Admin --> (Manage Users)
+    Admin --> (Manage Rentals)
+
+    (Register) .> (Login) : <<include>>
+
+    (View Available Cars) .> (View Car Details) : <<include>>
+    (View Available Cars) <|-- (Search Cars) : <<generalization>>
+
+    (Book Car) .> (View Available Cars) : <<include>>
+    (Book Car) .> (Select Rental Dates) : <<include>>
+    (Book Car) .> (Confirm Booking) : <<include>>
+
+    (Manage Rentals) .> (Approve Booking) : <<include>>
+    (Manage Rentals) .> (Deny Booking) : <<include>>
+    (Manage Rentals) .> (View Booking Details) : <<include>>
+    (Manage Rentals) <|-- (Rental Management) : <<generalization>>
+
+    (Manage Users) .> (Add User) : <<include>>
+    (Manage Users) .> (Update User) : <<include>>
+    (Manage Users) .> (Delete User) : <<include>>
+    (Manage Users) .> (View User Details) : <<include>>
+    (Manage Users) <|-- (User Management) : <<generalization>>
+
+    (Manage Cars) .> (Add Car) : <<include>>
+    (Manage Cars) .> (Update Car) : <<include>>
+    (Manage Cars) .> (Delete Car) : <<include>>
+    (Manage Cars) .> (View Car Details) : <<include>>
+    (Manage Cars) <|-- (Car Management) : <<generalization>>
+}
+
+@enduml

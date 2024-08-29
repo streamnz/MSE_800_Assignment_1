@@ -1,0 +1,72 @@
+@startuml
+
+!define RECTANGLE_COLOR #F9F9F9
+left to right direction
+
+object user1 {
+    user_id = 1
+    username = "johndoe"
+    email = "john@example.com"
+    role = "customer"
+}
+
+object user2 {
+    user_id = 2
+    username = "janedoe"
+    email = "jane@example.com"
+    role = "customer"
+}
+
+object admin {
+    user_id = 3
+    username = "admin"
+    email = "admin@example.com"
+    role = "admin"
+}
+
+object car1 {
+    car_id = 1
+    make = "Toyota"
+    model = "Corolla"
+    status = "available"
+}
+
+object car2 {
+    car_id = 2
+    make = "Honda"
+    model = "Civic"
+    status = "rented"
+}
+
+object booking1 {
+    booking_id = 1
+    user = user1
+    car = car1
+    start_date = "2024-08-01"
+    end_date = "2024-08-10"
+}
+
+object booking2 {
+    booking_id = 2
+    user = user2
+    car = car2
+    start_date = "2024-08-05"
+    end_date = "2024-08-15"
+}
+
+' Relations between users and their bookings
+user1 --> booking1
+car1 --> booking1
+
+user2 --> booking2
+car2 --> booking2
+
+' Admin relations
+admin --> car1 : "Manages"
+admin --> car2 : "Manages"
+admin --> booking1 : "Manages"
+admin --> booking2 : "Manages"
+admin --> user1 : "Manages"
+admin --> user2 : "Manages"
+
+@enduml

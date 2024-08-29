@@ -1,0 +1,124 @@
+@startuml
+|Main|
+start
+:Display Main Menu;
+:User selects "Register" or "Login";
+
+|Admin|
+if (Register?) then (yes)
+    :Input username, password, email;
+    :Select role (Customer/Admin);
+    if (Valid role?) then (yes)
+        :Register user;
+        :Display success message;
+    else (no)
+        :Display invalid role message;
+    endif
+else (no)
+    :Input username, password;
+    :Authenticate user;
+
+|Main|
+if (Login successful?) then (yes)
+    if (Customer?) then (yes)
+        |Customer|
+        :Display Customer Menu;
+        while (In Customer Menu?)
+            :Customer selects an option;
+            if (View Available Cars?) then (yes)
+                |Car Management|
+                :Display available cars;
+            elseif (Book a Car?) then (yes)
+                |Booking Management|
+                :Customer books a car;
+            elseif (View Rental History?) then (yes)
+                |Booking Management|
+                :Display rental history;
+            elseif (View Current User Info?) then (yes)
+                |User Management|
+                :Display current user info;
+            elseif (Logout?) then (yes)
+                |Main|
+                :Logout and exit menu;
+                break
+            else (Invalid choice)
+                :Display invalid choice message;
+            endif
+        endwhile
+    else (Admin?) then (yes)
+        |Admin|
+        :Display Admin Menu;
+        while (In Admin Menu?)
+            :Admin selects an option;
+            if (Car Management?) then (yes)
+                |Car Management|
+                :Display Car Management Menu;
+                while (In Car Management Menu?)
+                    :Admin selects car option;
+                    if (Add Car?) then (yes)
+                        :Add car;
+                    elseif (Update Car?) then (yes)
+                        :Update car;
+                    elseif (Delete Car?) then (yes)
+                        :Delete car;
+                    elseif (Back?) then (yes)
+                        :Exit Car Management Menu;
+                        break
+                    else (Invalid choice)
+                        :Display invalid choice message;
+                    endif
+                endwhile
+            elseif (User Management?) then (yes)
+                |User Management|
+                :Display User Management Menu;
+                while (In User Management Menu?)
+                    :Admin selects user option;
+                    if (Add Customer?) then (yes)
+                        :Add customer;
+                    elseif (Add Admin?) then (yes)
+                        :Add admin;
+                    elseif (Update User?) then (yes)
+                        :Update user;
+                    elseif (Delete User?) then (yes)
+                        :Delete user;
+                    elseif (View User Details?) then (yes)
+                        :View user details;
+                    elseif (Back?) then (yes)
+                        :Exit User Management Menu;
+                        break
+                    else (Invalid choice)
+                        :Display invalid choice message;
+                    endif
+                endwhile
+            elseif (Rental Management?) then (yes)
+                |Booking Management|
+                :Display Rental Management Menu;
+                while (In Rental Management Menu?)
+                    :Admin selects rental option;
+                    if (Approve Booking?) then (yes)
+                        :Approve booking;
+                    elseif (Deny Booking?) then (yes)
+                        :Deny booking;
+                    elseif (View Booking Details?) then (yes)
+                        :View booking details;
+                    elseif (Back?) then (yes)
+                        :Exit Rental Management Menu;
+                        break
+                    else (Invalid choice)
+                        :Display invalid choice message;
+                    endif
+                endwhile
+            elseif (Logout?) then (yes)
+                |Main|
+                :Logout and exit menu;
+                break
+            else (Invalid choice)
+                :Display invalid choice message;
+            endif
+        endwhile
+    endif
+else (no)
+    :Display login failure message;
+endif
+stop
+@enduml

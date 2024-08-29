@@ -1,0 +1,63 @@
+@startuml
+start
+
+:User Registration;
+fork
+  :Validate user input;
+  :Check if user already exists;
+end fork
+
+:Create new user in database;
+:Send confirmation to user;
+end
+
+:User Login;
+fork
+  :Validate credentials;
+  :Check user role;
+end fork
+
+:Grant access;
+:Redirect to dashboard;
+end
+
+:View Available Cars;
+:Display car details;
+:Allow filtering and sorting;
+end
+
+:Book Car;
+fork
+  :Check car availability;
+  :Reserve car;
+end fork
+
+:Process payment;
+:Send booking confirmation;
+end
+
+:Manage Bookings;
+fork
+  :View all bookings;
+  :Approve or deny bookings;
+end fork
+
+:Update booking status;
+end
+
+:User Management;
+fork
+  :Add new user;
+  :Update user information;
+  :Delete user;
+end fork
+
+:Car Management;
+fork
+  :Add new car;
+  :Update car information;
+  :Delete car;
+end fork
+
+stop
+@enduml

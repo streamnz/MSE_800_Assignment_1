@@ -1,0 +1,21 @@
+@startuml
+actor User as U
+participant "Booking Service" as BS
+participant "Car Management Service" as CMS
+participant "Payment Gateway" as PG
+participant "Booking Database" as BD
+
+U -> BS: Request to book a car
+BS -> CMS: Check car availability
+CMS -> BD: Query car status
+BD --> CMS: Car is available
+CMS --> BS: Car availability confirmed
+
+BS -> PG: Process payment
+PG --> BS: Payment successful
+
+BS -> BD: Create booking record
+BD --> BS: Booking record created
+
+BS --> U: Booking confirmed
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+!define RECTANGLE_COLOR #F9F9F9
+
+left to right direction
+
+package "Car Rental System" {
+    [CUI] --> [Main Service]
+
+    [Main Service] --> [User Management]
+    [Main Service] --> [Car Management]
+    [Main Service] --> [Booking Management]
+
+
+    [User Management] --> [Role Service]
+    [User Management] --> [Database]
+    [Car Management] --> [Database]
+
+    [Booking Management] --> [Database]
+    [Booking Management] --> [Notification Service]
+
+    [Role Service] --> [Database]
+
+}
+
+@enduml

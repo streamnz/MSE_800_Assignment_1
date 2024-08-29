@@ -1,0 +1,56 @@
+@startuml
+skinparam rectangle {
+  BackgroundColor White
+  BorderColor Black
+  Shadowing true
+}
+
+rectangle "CUI Client Layer" as CUI {
+    rectangle "Command-line Interface" as CLI
+}
+
+rectangle "Command-line Service" as CLS {
+
+    rectangle "User Management Module" as UMM {
+        rectangle "User Registration Login RBAC（Role based access control）" as UR
+    }
+
+    rectangle "Car Management Module" as CMM {
+        rectangle "Calculate available cars and manage Car" as AC
+    }
+
+    rectangle "Booking Module" as RBM {
+        rectangle "Select Car/Time calculate fees" as VACB
+        rectangle "Booking Reservation" as BR
+    }
+
+    rectangle "Rental Management Module" as RMM {
+        rectangle "Approve/Reject/Query booking" as ARB
+    }
+}
+    rectangle "DAO Layer" as DAOL {
+        rectangle "UserDAO" as UDAO
+        rectangle "CarDAO" as CDAO
+        rectangle "BookingDAO" as BDAO
+    }
+   rectangle "Database (MySQL)" as DB {
+        rectangle "USERS Table" as UT
+        rectangle "CARS Table" as CT
+        rectangle "BOOKINGS Table" as BT
+    }
+
+
+CUI --> CLS
+CLS --> DAOL
+DAOL --> DB
+
+UMM --> UDAO
+CMM --> CDAO
+RBM --> BDAO
+RMM --> BDAO
+
+UDAO --> UT
+CDAO --> CT
+BDAO --> BT
+
+@enduml

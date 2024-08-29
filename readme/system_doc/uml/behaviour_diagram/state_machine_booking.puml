@@ -1,0 +1,10 @@
+@startuml
+[*] --> Pending
+
+Pending --> Confirmed : Payment Success
+Pending --> Cancelled : User Cancels
+Confirmed --> Cancelled : User Cancels
+Confirmed --> Completed : Rental Period Ends
+Cancelled --> [*]
+Completed --> [*]
+@enduml

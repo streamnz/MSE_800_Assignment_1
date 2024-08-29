@@ -1,0 +1,10 @@
+@startuml
+[*] --> Available
+
+Available --> Booked : Car Booked
+Booked --> Rented : Car Picked Up
+Rented --> Available : Car Returned
+Rented --> Maintenance : Maintenance Required
+Maintenance --> Available : Maintenance Completed
+Maintenance --> [*]
+@enduml

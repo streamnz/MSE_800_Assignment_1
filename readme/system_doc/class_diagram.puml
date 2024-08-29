@@ -1,0 +1,108 @@
+@startuml
+
+!define DB
+
+package "model" {
+    class User {
+        - user_id: int
+        - username: string
+        - password: string
+        - email: string
+        - role: string
+        - is_del: bool
+    }
+
+    class Car {
+        - car_id: int
+        - make: string
+        - model: string
+        - year: int
+        - license_plate: string
+        - mileage: float
+        - status: string
+        - is_del: bool
+    }
+
+    class Booking {
+        - booking_id: int
+        - user_id: int
+        - car_id: int
+        - start_date: date
+        - end_date: date
+        - status: string
+        - rental_date: date
+        - return_date: date
+        - is_del: bool
+    }
+}
+
+package "dao" {
+    class UserDAO {
+        - db_connection: DB
+        + create_user(user: User)
+        + get_user_by_id(user_id: int): User
+        + get_user_by_username(username: str): User
+        + update_user(user: User)
+        + delete_user(user_id: int)
+    }
+
+    class CarDAO {
+        - db_connection: DB
+        + add_car(car: Car)
+        + get_car_by_id(car_id: int): Car
+        + update_car(car: Car)
+        + delete_car(car_id: int)
+    }
+
+    class BookingDAO {
+        - db_connection: DB
+        + add_booking(booking: Booking)
+        + get_booking_by_id(booking_id: int): Booking
+        + update_booking(booking: Booking)
+        + delete_booking(booking_id: int)
+    }
+}
+
+package "service" {
+    class UserManagement {
+        - user_dao: UserDAO
+        + register_user(username: str, password: str, email: str, role: str)
+        + login_user(username: str, password: str): User
+        + update_user(user_id: int)
+        + delete_user(user_id: int)
+    }
+
+    class CarManagement {
+        - car_dao: CarDAO
+        + add_car(make: str, model: str, year: int, license_plate: str, mileage: float, status: str)
+        + update_car(car_id: int)
+        + delete_car(car_id: int)
+    }
+
+    class BookingManagement {
+        - booking_dao: BookingDAO
+        + create_booking(user_id: int, car_id: int, start_date: date, end_date: date)
+        + update_booking(booking_id: int, status: str)
+        + cancel_booking(booking_id: int)
+    }
+}
+
+package "utils" {
+    class DatabaseConnection {
+        - _instance: singleton
+        + create_connection()
+        + close_connection()
+    }
+}
+
+DatabaseConnection --> UserDAO
+DatabaseConnection --> CarDAO
+DatabaseConnection --> BookingDAO
+UserManagement --> UserDAO
+CarManagement --> CarDAO
+BookingManagement --> BookingDAO
+UserManagement --> User
+CarManagement --> Car
+BookingManagement --> Booking
+
+@enduml

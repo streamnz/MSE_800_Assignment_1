@@ -1,0 +1,37 @@
+@startuml
+package "Car Rental System" {
+
+    component "User Management Module" as UMM {
+        [UserDAO] - [User]
+        [UserManagement] ..> [UserDAO] : manages
+        [UserManagement] o-- [User]
+        [User] - [Role]
+    }
+
+    component "Car Management Module" as CMM {
+        [CarDAO] - [Car]
+        [CarManagement] ..> [CarDAO] : manages
+        [CarManagement] o-- [Car]
+    }
+
+    component "Booking Management Module" as BMM {
+        [BookingDAO] - [Booking]
+        [BookingManagement] ..> [BookingDAO] : manages
+        [BookingManagement] o-- [Booking]
+    }
+
+    component "Rental Management Module" as RMM {
+        [RentalManagement] ..> [Booking] : approves/rejects
+        [RentalManagement] ..> [Car] : checks availability
+        [RentalManagement] o-- [Admin] : managed by
+    }
+
+    [UMM] --> [BMM] : interacts
+    [CMM] --> [BMM] : provides cars
+    [RMM] --> [UMM] : manages users
+
+    [Admin] --> [UMM] : uses
+    [Admin] --> [CMM] : uses
+    [Admin] --> [RMM] : uses
+}
+@enduml
