@@ -41,6 +41,7 @@ class DatabaseConnection:
                 if self._connection.is_connected():
                     print("Connection to Google MySQL database is successful!")
                     print("System is ready...")
+                    print("Try Admin User: user_name=admin,password=admin")
             except Error as e:
                 print(f"Error: '{e}'")
                 self._connection = None
