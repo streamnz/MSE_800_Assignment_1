@@ -22,12 +22,12 @@
    - The project uses a MySQL database hosted on Google Cloud. Configure the database connection in the `config.ini` file located in the project root:
      ```ini
      [mysql]
-     host = 34.129.209.30
+     host = rm-uf6wz9309g448ly67no.mysql.rds.aliyuncs.com
      port = 3306
      database = MSE800
-     user = streamnz
-     encrypted_password = gAAAAABm0G9fSD2pmeXWf4bcX2NFSLXVEMdEnABHrxCpEL6G3aKTsrI8NEgJ5E5ypSjoWqiZJun9zQ0R7JE6hRj-Thk3OcCDkw==
-     DB_KEY = L3tLdmglGKFdIeYe9xHLPa_ebkN3TX-NVZGK79ExoQk=
+     user = chenghao
+     encrypted_password =gAAAAABm7lDveEoiAYFwXOrNnGcrLGPAAzVur5KBmg2bj_EoFczIrjZEoBBJFWVs3wYXV-ihZJ-b1-19St_-9IWbdPal9_SfZg==
+     DB_KEY=L3tLdmglGKFdIeYe9xHLPa_ebkN3TX-NVZGK79ExoQk=
      ```
 
 2. **Initialize Mock Data:**
